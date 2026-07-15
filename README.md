@@ -279,3 +279,36 @@ docker compose up -d
 Claude Code v2.1.208
 Fable 5 · Claude Pro
 ```
+
+## Linkedin post 
+
+```text
+I asked AI to clean up more than a decade of my own technical debt — prehistoric code, by web standards. It worked. So what is everyone else's excuse?
+
+Summer is not only for slow work — it is for shipping the things that have been pending for ages. Refining my WordPress blog theme was one of them.
+
+The starting point: a theme assembled over the years like a family lasagna. Layers of borrowed code, half-documented changes, design by Jean-Michel "Roughly-Right" and code by Dimitri "SyntaxError" Semicolon — both fictional, the John Does of sloppy work. Any resemblance to actual colleagues is purely coincidental. Though you never know. Barely responsive, vaguely SEO-friendly. GEO-ready (quotable by AI engines)? Don't even ask.
+
+What we shipped, one roadmap step at a time, with Claude Code and its new Fable 5 model:
+- Dead code purge: theme cut from 7 MB to 4 MB (including a page builder that was never even loaded)
+- jQuery plugins replaced by native CSS and JS: fewer requests, faster pages
+- UX modernization: dark mode, responsive fixes
+- SEO layer: meta descriptions, Open Graph, Twitter Cards, structured data — polite enough to disable itself if Yoast and friends show up
+- An AI pipeline: a Python script and Claude writing meta descriptions for 200+ posts, plus a WordPress plugin to preview the diff, review and import them
+- Everything linted, versioned, smoke-tested on a Docker staging
+
+And voilà... ta-daa: https://flaven.fr/ — still not perfect on UX and web design ("les goûts et les couleurs": no accounting for taste, as we say in French), but far more maintainable, and stuffed with AI editorial features that feed the content for SEO and GEO.
+
+For the geeks: WordPress (classic editor, Underscores-based theme), PHP, jQuery, Docker Compose, MySQL 8, WP-CLI, Python + Mistral and Chatgpt API key, all driven from the terminal by Claude Code with Fable 5.
+
+For the P.O., the user story: "As a blog owner, I want my aging theme to become fast, responsive and SEO/GEO-ready without a full rebuild, so that my content gets found — by humans and by AI." Delivered. No sprint ceremony required.
+
+The ironic part? None of this was technically hard anymore. With AI, execution has become cheap. What remains expensive is having ideas — and the honesty to face your own technical debt. Yet I still meet experts hiding behind "technical complexity" like a gated community: complexity as an alibi, cathedrals of emptiness. To them I dedicate the title of Emmanuel Carrère's biography of Philip K. Dick: "I Am Alive and You Are Dead." The tools have changed. Curiosity is the only moat left.
+
+One more thing: the theme is called Zaatar, after the spice — a nod to my Syrian-Lebanese friends (Alaa, Fouad...) and their cuisine, which deserves more fame than my CSS.
+
+Prompts, CLAUDE.md, theme and plugins are public here:
+https://github.com/bflaven/zaatar-a_wp-theme-refined-by-claude
+
+#WordPress #ClaudeCode #AI #SEO #TechnicalDebt #OpenSource
+```
