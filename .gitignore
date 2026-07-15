@@ -1,25 +1,45 @@
-# CakePHP 3
+# Claude Code
+.claude/
 
-/vendor/*
-/config/app.php
+# OS
+.DS_Store
+Thumbs.db
 
-/tmp/cache/models/*
-!/tmp/cache/models/empty
-/tmp/cache/persistent/*
-!/tmp/cache/persistent/empty
-/tmp/cache/views/*
-!/tmp/cache/views/empty
-/tmp/sessions/*
-!/tmp/sessions/empty
-/tmp/tests/*
-!/tmp/tests/empty
+# Local working directories (not part of the deliverable)
+_archives/
+_prompt/
+_db_*/
+*.diff
 
-/logs/*
-!/logs/empty
+# Logs / temp
+*.log
+*.sql
+*.gz
 
-# CakePHP 2
+# WordPress: track ONLY the zaatar theme (core + plugins + uploads ignored)
+wordpress/*
+!wordpress/wp-content/
+wordpress/wp-content/*
+!wordpress/wp-content/themes/
+wordpress/wp-content/themes/*
+!wordpress/wp-content/themes/zaatar/
 
-/app/tmp/*
-/app/Config/core.php
-/app/Config/database.php
-/vendors/*
+# Node / build (future-proofing)
+node_modules/
+dist/
+
+# Secrets
+.env
+.env.*
+
+# Companion plugins built by this project (rest of plugins/ stays ignored)
+!wordpress/wp-content/plugins/
+wordpress/wp-content/plugins/*
+!wordpress/wp-content/plugins/bf-ai-meta-import/
+
+# Pipeline data artifacts (regenerated per batch, imported via wp-admin)
+tools/output/
+wordpress/wp-content/plugins/bf-ai-meta-import/meta_descriptions.json
+!wordpress/wp-content/plugins/bf-amazon-widget/
+__pycache__/
+*.pyc

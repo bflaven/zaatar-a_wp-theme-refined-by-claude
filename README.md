@@ -3,13 +3,6 @@
 Refinement of the **Zaatar** WordPress theme (live on flaven.fr). The theme lives in `wordpress/wp-content/themes/zaatar/` — that is the only directory tracked in git and the only place code changes belong. WordPress core and plugins are a vanilla install and must not be modified.
 
 
-
-
-
-
-
-
-
 # wp_flaven_refine_theme
 
 Refinement project for the **Zaatar** WordPress theme powering [flaven.fr](https://flaven.fr).
@@ -197,7 +190,9 @@ License: GPL v2 or later.
 
 ## Savvy commands for claude code and operational environment 
 
-```
+1. Some commands to leverage a pipeline. See `tools`. Connect with a wp plugin.
+
+```bash
 # OG GENERATE_META_DESCRIPTIONS
 
 # path
@@ -257,8 +252,12 @@ python tools/generate_meta_descriptions.py --ids 9894,9884,3909,3896,3894,3875,3
 
 # DONE 
 python tools/generate_meta_descriptions.py --ids 9894,9884,3909,3896,3894,3875,3866,9353,3852,3854,3856,3844,3847,3849,3653,3651,3646,8558,3626,3613,3615,3604,3593,3595,3575,8501,3552,3554,3556,3529,8441,8414,8401,3516,3511,3514,3496,3494,8369,3491,8319,3489,3487,8291,3481,3467,3454,8264,8202,8189 --source https://flaven.fr
+```
 
 
+2. The anaconda env if needed for the pipeline. See `tools`. Connect with a wp plugin.
+
+```bash
 
 # CONDA ENVIRONMENT
 # Conda Environment
@@ -266,10 +265,12 @@ conda create --name editorial_treatment python=3.12
 conda info --envs
 source activate editorial_treatment
 conda deactivate
+```
 
 
+3. Open at least two consoles with Claude Code and Docker to creata a staging.
 
-
+```bash
 # CLAUDE (CONSOLE_1)
 cd /Users/brunoflaven/Documents/01_work/_wp_flaven_refine_theme
 claude
@@ -279,5 +280,3 @@ cd /Users/brunoflaven/Documents/01_work/_wp_flaven_refine_theme/
 docker compose down
 docker compose up -d
 ```
-
-
