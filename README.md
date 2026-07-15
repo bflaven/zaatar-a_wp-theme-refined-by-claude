@@ -10,7 +10,7 @@ Goal: normalize the code, remove obsolete files, and improve maintainability, UX
 
 ## Project layout
 
-
+```bash
 .
 ├── docker-compose.yml          # Local staging stack
 ├── wordpress/                  # Full WP install (mounted into the container)
