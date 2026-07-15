@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BF AI Meta Import
  * Description: Imports and bulk-edits AI-generated meta descriptions (bf_ai_meta_description) and social titles (bf_ai_og_title). Rendering is done by the Zaatar theme (inc/seo.php); this plugin only manages the data, so it can be deactivated once the fields are in place.
- * Version: 1.2
+ * Version: 1.3
  * Author: Bruno Flaven
  * License: GPL v2 or later
  * Text Domain: bf-ai-meta-import
@@ -63,8 +63,8 @@ function bfami_admin_assets( $hook ) {
 		return;
 	}
 	$base = plugin_dir_url( __FILE__ ) . 'assets/';
-	wp_enqueue_style( 'bfami-admin', $base . 'admin.css', array(), '1.2' );
-	wp_enqueue_script( 'bfami-admin', $base . 'admin.js', array(), '1.2', true );
+	wp_enqueue_style( 'bfami-admin', $base . 'admin.css', array(), '1.3' );
+	wp_enqueue_script( 'bfami-admin', $base . 'admin.js', array(), '1.3', true );
 }
 add_action( 'admin_enqueue_scripts', 'bfami_admin_assets' );
 
@@ -106,17 +106,24 @@ function bfami_resolve_entries() {
 }
 
 /**
- * Import entries: fills the two custom fields on posts that do not
- * have them yet. Never overwrites an existing value.
+ * Import entries. By default fills the two custom fields on posts that
+ * do not have them yet; with $overwrite it also replaces values that
+ * differ from the JSON. With $dry_run nothing is written — the report
+ * describes what an import WOULD do (diff between JSON and database).
  *
- * @return array{imported:int,skipped:int,missing:int,errors:string[]}
+ * @param bool $overwrite Replace existing values when the JSON differs.
+ * @param bool $dry_run   Compute the diff without writing anything.
+ * @return array{imported:int,updated:int,blocked:int,skipped:int,missing:int,errors:string[],changes:array[]}
  */
-function bfami_run_import() {
+function bfami_run_import( $overwrite = false, $dry_run = false ) {
 	$report = array(
-		'imported' => 0,
-		'skipped'  => 0,
+		'imported' => 0, // posts where an empty field was filled
+		'updated'  => 0, // posts where an existing value was overwritten
+		'blocked'  => 0, // posts where the JSON differs but overwrite is off
+		'skipped'  => 0, // posts already in sync with the JSON
 		'missing'  => 0,
 		'errors'   => array(),
+		'changes'  => array(),
 	);
 
 	$entries = bfami_resolve_entries();
@@ -125,6 +132,11 @@ function bfami_run_import() {
 		return $report;
 	}
 
+	$fields = array(
+		'description' => BFAMI_DESCRIPTION_KEY,
+		'og_title'    => BFAMI_OG_TITLE_KEY,
+	);
+
 	foreach ( $entries as $entry ) {
 		$post_id = isset( $entry['id'] ) ? (int) $entry['id'] : 0;
 		if ( ! $post_id || 'post' !== get_post_type( $post_id ) ) {
@@ -132,26 +144,54 @@ function bfami_run_import() {
 			continue;
 		}
 
-		$wrote = false;
+		$filled      = false;
+		$overwritten = false;
+		$blocked     = false;
 
-		$description = isset( $entry['description'] ) ? sanitize_text_field( $entry['description'] ) : '';
-		if ( '' !== $description ) {
-			if ( '' === (string) get_post_meta( $post_id, BFAMI_DESCRIPTION_KEY, true ) ) {
-				update_post_meta( $post_id, BFAMI_DESCRIPTION_KEY, $description );
-				$wrote = true;
+		foreach ( $fields as $field => $key ) {
+			$new = isset( $entry[ $field ] ) ? sanitize_text_field( (string) $entry[ $field ] ) : '';
+			if ( '' === $new ) {
+				continue;
 			}
+			$current = (string) get_post_meta( $post_id, $key, true );
+			if ( $new === $current ) {
+				continue;
+			}
+
+			if ( '' === $current ) {
+				$action = 'fill';
+				$filled = true;
+			} elseif ( $overwrite ) {
+				$action      = 'overwrite';
+				$overwritten = true;
+			} else {
+				$action  = 'blocked';
+				$blocked = true;
+			}
+
+			if ( ! $dry_run && 'blocked' !== $action ) {
+				update_post_meta( $post_id, $key, $new );
+			}
+
+			$report['changes'][] = array(
+				'post_id' => $post_id,
+				'title'   => get_the_title( $post_id ),
+				'field'   => $field,
+				'action'  => $action,
+				'old'     => $current,
+				'new'     => $new,
+			);
 		}
 
-		$og_title = isset( $entry['og_title'] ) ? sanitize_text_field( (string) $entry['og_title'] ) : '';
-		if ( '' !== $og_title ) {
-			if ( '' === (string) get_post_meta( $post_id, BFAMI_OG_TITLE_KEY, true ) ) {
-				update_post_meta( $post_id, BFAMI_OG_TITLE_KEY, $og_title );
-				$wrote = true;
+		if ( $filled || $overwritten ) {
+			if ( $filled ) {
+				$report['imported']++;
 			}
-		}
-
-		if ( $wrote ) {
-			$report['imported']++;
+			if ( $overwritten && ! $filled ) {
+				$report['updated']++;
+			}
+		} elseif ( $blocked ) {
+			$report['blocked']++;
 		} else {
 			$report['skipped']++;
 		}
@@ -217,11 +257,14 @@ function bfami_render_page() {
 	$tab = isset( $_GET['tab'] ) && 'review' === $_GET['tab'] ? 'review' : 'import';
 
 	$import_report = null;
+	$preview       = false;
 	$saved         = null;
 
 	if ( 'POST' === ( $_SERVER['REQUEST_METHOD'] ?? '' ) ) {
-		if ( isset( $_POST['bfami_do_import'] ) && check_admin_referer( 'bfami_import' ) ) {
-			$import_report = bfami_run_import();
+		if ( ( isset( $_POST['bfami_do_import'] ) || isset( $_POST['bfami_do_preview'] ) ) && check_admin_referer( 'bfami_import' ) ) {
+			$preview       = isset( $_POST['bfami_do_preview'] );
+			$overwrite     = ! empty( $_POST['bfami_overwrite'] );
+			$import_report = bfami_run_import( $overwrite, $preview );
 			$tab           = 'import';
 		} elseif ( isset( $_POST['bfami_do_save'] ) && check_admin_referer( 'bfami_review' ) ) {
 			$saved = bfami_save_bulk_edits();
@@ -245,7 +288,7 @@ function bfami_render_page() {
 
 		<?php
 		if ( 'import' === $tab ) {
-			bfami_render_import_tab( $import_report );
+			bfami_render_import_tab( $import_report, $preview );
 		} else {
 			bfami_render_review_tab( $saved );
 		}
@@ -255,11 +298,12 @@ function bfami_render_page() {
 }
 
 /**
- * Import tab: state of the bundled JSON + the import button + report.
+ * Import tab: state of the bundled JSON + preview/import buttons + report.
  *
- * @param array|null $report Result of bfami_run_import() on POST.
+ * @param array|null $report  Result of bfami_run_import() on POST.
+ * @param bool       $preview Whether $report is a dry run (nothing written).
  */
-function bfami_render_import_tab( $report ) {
+function bfami_render_import_tab( $report, $preview = false ) {
 	$json_state = __( 'No meta_descriptions.json in the plugin folder yet — pick one below.', 'bf-ai-meta-import' );
 	if ( file_exists( BFAMI_JSON_FILE ) ) {
 		$decoded    = json_decode( (string) file_get_contents( BFAMI_JSON_FILE ), true );
@@ -280,19 +324,25 @@ function bfami_render_import_tab( $report ) {
 		<?php if ( $report['errors'] ) : ?>
 			<div class="notice notice-error"><p><?php echo esc_html( implode( ' ', $report['errors'] ) ); ?></p></div>
 		<?php else : ?>
-			<div class="notice notice-success">
+			<div class="notice <?php echo $preview ? 'notice-info' : 'notice-success'; ?>">
 				<p>
+					<?php if ( $preview ) : ?>
+						<strong><?php esc_html_e( 'Preview — nothing was written.', 'bf-ai-meta-import' ); ?></strong>
+					<?php endif; ?>
 					<?php
 					printf(
-						/* translators: 1-3: counters */
-						esc_html__( '%1$d posts updated, %2$d skipped (fields already set), %3$d entries without a matching post.', 'bf-ai-meta-import' ),
+						/* translators: 1-5: counters */
+						esc_html__( '%1$d posts filled (field was empty), %2$d overwritten, %3$d differ from the JSON but were kept (overwrite is off), %4$d already in sync, %5$d entries without a matching post.', 'bf-ai-meta-import' ),
 						(int) $report['imported'],
+						(int) $report['updated'],
+						(int) $report['blocked'],
 						(int) $report['skipped'],
 						(int) $report['missing']
 					);
 					?>
 				</p>
 			</div>
+			<?php bfami_render_import_diff( $report['changes'], $preview ); ?>
 		<?php endif; ?>
 	<?php endif; ?>
 
@@ -303,11 +353,88 @@ function bfami_render_import_tab( $report ) {
 			<input type="file" id="bfami-json-file" name="bfami_json" accept=".json,application/json">
 		</p>
 		<p>
+			<label>
+				<input type="checkbox" name="bfami_overwrite" value="1" <?php checked( ! empty( $_POST['bfami_overwrite'] ) ); ?>>
+				<?php esc_html_e( 'Overwrite existing values when the JSON differs (replaces manual edits — preview first).', 'bf-ai-meta-import' ); ?>
+			</label>
+		</p>
+		<p>
+			<button type="submit" name="bfami_do_preview" value="1" class="button">
+				<?php esc_html_e( 'Preview changes', 'bf-ai-meta-import' ); ?>
+			</button>
 			<button type="submit" name="bfami_do_import" value="1" class="button button-primary">
 				<?php esc_html_e( 'Import', 'bf-ai-meta-import' ); ?>
 			</button>
 		</p>
+		<p class="description">
+			<?php esc_html_e( 'Preview shows the diff between the JSON and the database without writing anything. An uploaded file is kept for the next run, so you can preview it, then import without re-picking it.', 'bf-ai-meta-import' ); ?>
+		</p>
 	</form>
+	<?php
+}
+
+/**
+ * Diff table between the JSON and the database (used by both preview
+ * and the post-import report).
+ *
+ * @param array[] $changes Rows from bfami_run_import()'s 'changes'.
+ * @param bool    $preview Dry run (future tense labels).
+ */
+function bfami_render_import_diff( $changes, $preview ) {
+	if ( ! $changes ) {
+		return;
+	}
+	$labels = $preview
+		? array(
+			'fill'      => __( 'will fill', 'bf-ai-meta-import' ),
+			'overwrite' => __( 'will overwrite', 'bf-ai-meta-import' ),
+			'blocked'   => __( 'kept (overwrite off)', 'bf-ai-meta-import' ),
+		)
+		: array(
+			'fill'      => __( 'filled', 'bf-ai-meta-import' ),
+			'overwrite' => __( 'overwritten', 'bf-ai-meta-import' ),
+			'blocked'   => __( 'kept (overwrite off)', 'bf-ai-meta-import' ),
+		);
+	$fields = array(
+		'description' => __( 'Description', 'bf-ai-meta-import' ),
+		'og_title'    => __( 'OG title', 'bf-ai-meta-import' ),
+	);
+	?>
+	<h3>
+		<?php
+		/* translators: %d: number of field-level differences */
+		printf( esc_html__( 'Diff: %d field(s) differ between the JSON and the database', 'bf-ai-meta-import' ), count( $changes ) );
+		?>
+	</h3>
+	<table class="widefat striped bfami-diff-table">
+		<thead>
+			<tr>
+				<th style="width:70px"><?php esc_html_e( 'ID', 'bf-ai-meta-import' ); ?></th>
+				<th style="width:22%"><?php esc_html_e( 'Post', 'bf-ai-meta-import' ); ?></th>
+				<th style="width:90px"><?php esc_html_e( 'Field', 'bf-ai-meta-import' ); ?></th>
+				<th style="width:130px"><?php esc_html_e( 'Action', 'bf-ai-meta-import' ); ?></th>
+				<th><?php esc_html_e( 'Current → JSON', 'bf-ai-meta-import' ); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach ( $changes as $change ) : ?>
+			<tr>
+				<td><code class="bfami-id"><?php echo (int) $change['post_id']; ?></code></td>
+				<td><strong><?php echo esc_html( $change['title'] ); ?></strong></td>
+				<td><?php echo esc_html( $fields[ $change['field'] ] ?? $change['field'] ); ?></td>
+				<td><span class="bfami-badge bfami-badge--<?php echo esc_attr( $change['action'] ); ?>"><?php echo esc_html( $labels[ $change['action'] ] ?? $change['action'] ); ?></span></td>
+				<td class="bfami-diff-values">
+					<?php if ( '' !== $change['old'] ) : ?>
+						<del><?php echo esc_html( $change['old'] ); ?></del>
+					<?php else : ?>
+						<em class="description"><?php esc_html_e( '(empty)', 'bf-ai-meta-import' ); ?></em>
+					<?php endif; ?>
+					<ins><?php echo esc_html( $change['new'] ); ?></ins>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</tbody>
+	</table>
 	<?php
 }
 
@@ -498,9 +625,13 @@ function bfami_render_review_tab( $saved ) {
 		<?php wp_nonce_field( 'bfami_review' ); ?>
 
 		<div class="tablenav bfami-tablenav bfami-tablenav--top">
-			<button type="submit" name="bfami_do_save" value="1" class="button button-primary">
-				<?php esc_html_e( 'Save all changes on this page', 'bf-ai-meta-import' ); ?>
-			</button>
+			<span class="bfami-save-group">
+				<button type="submit" name="bfami_do_save" value="1" class="button button-primary bfami-save"
+					data-label-dirty="<?php /* translators: %d: number of edited posts */ esc_attr_e( 'Save changes (%d posts)', 'bf-ai-meta-import' ); ?>"
+					data-label-clean="<?php esc_attr_e( 'No changes to save', 'bf-ai-meta-import' ); ?>">
+					<?php esc_html_e( 'Save all changes on this page', 'bf-ai-meta-import' ); ?>
+				</button>
+			</span>
 			<?php bfami_render_pagination( (int) $query->found_posts, $per_page, $paged, $url_params, 'top' ); ?>
 		</div>
 
@@ -555,9 +686,13 @@ function bfami_render_review_tab( $saved ) {
 		<?php endif; ?>
 
 		<div class="tablenav bfami-tablenav bfami-tablenav--bottom">
-			<button type="submit" name="bfami_do_save" value="1" class="button button-primary">
-				<?php esc_html_e( 'Save all changes on this page', 'bf-ai-meta-import' ); ?>
-			</button>
+			<span class="bfami-save-group">
+				<button type="submit" name="bfami_do_save" value="1" class="button button-primary bfami-save"
+					data-label-dirty="<?php /* translators: %d: number of edited posts */ esc_attr_e( 'Save changes (%d posts)', 'bf-ai-meta-import' ); ?>"
+					data-label-clean="<?php esc_attr_e( 'No changes to save', 'bf-ai-meta-import' ); ?>">
+					<?php esc_html_e( 'Save all changes on this page', 'bf-ai-meta-import' ); ?>
+				</button>
+			</span>
 			<?php bfami_render_pagination( (int) $query->found_posts, $per_page, $paged, $url_params, 'bottom' ); ?>
 		</div>
 	</form>

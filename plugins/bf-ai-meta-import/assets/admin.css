@@ -148,3 +148,46 @@
 .bfami-row-missing td {
 	background: #fcf9e8;
 }
+
+.bfami-table tr.bfami-row-dirty td {
+	background: #e8f2fa;
+	box-shadow: inset 3px 0 0 #2271b1;
+}
+
+/* ── Import diff table (preview / post-import report) ──────────────────── */
+
+.bfami-diff-table {
+	margin-top: 8px;
+}
+
+.bfami-diff-values del {
+	display: block;
+	color: #b32d2e;
+	background: #fcf0f1;
+	text-decoration: line-through;
+	padding: 1px 4px;
+	border-radius: 2px;
+}
+
+.bfami-diff-values ins {
+	display: block;
+	color: #00450c;
+	background: #edfaef;
+	text-decoration: none;
+	padding: 1px 4px;
+	border-radius: 2px;
+	margin-top: 2px;
+}
+
+.bfami-badge {
+	display: inline-block;
+	padding: 1px 8px;
+	border-radius: 9px;
+	font-size: 11px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.bfami-badge--fill      { background: #edfaef; color: #00450c; border: 1px solid #00a32a; }
+.bfami-badge--overwrite { background: #fcf0f1; color: #8a1f21; border: 1px solid #d63638; }
+.bfami-badge--blocked   { background: #fcf9e8; color: #6c5a12; border: 1px solid #dba617; }

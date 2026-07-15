@@ -21,6 +21,56 @@
 		});
 	});
 
+	// Dirty tracking on the bulk review table: highlight edited rows,
+	// show the edited-post count on the save buttons, warn before
+	// leaving the page with unsaved edits.
+	var table = document.querySelector('.bfami-table');
+	var saveButtons = document.querySelectorAll('.bfami-save');
+	var submitting = false;
+
+	function fieldDirty(field) {
+		return field.value !== field.defaultValue;
+	}
+
+	function refreshDirtyState() {
+		var dirtyRows = 0;
+		table.querySelectorAll('tbody tr').forEach(function (row) {
+			var dirty = Array.prototype.some.call(
+				row.querySelectorAll('textarea, input[type="text"]'),
+				fieldDirty
+			);
+			row.classList.toggle('bfami-row-dirty', dirty);
+			if (dirty) {
+				dirtyRows++;
+			}
+		});
+		saveButtons.forEach(function (button) {
+			if (dirtyRows) {
+				button.disabled = false;
+				button.textContent = button.dataset.labelDirty.replace('%d', String(dirtyRows));
+			} else {
+				button.disabled = true;
+				button.textContent = button.dataset.labelClean;
+			}
+		});
+		return dirtyRows;
+	}
+
+	if (table && saveButtons.length) {
+		refreshDirtyState();
+		table.addEventListener('input', refreshDirtyState);
+
+		table.closest('form').addEventListener('submit', function () {
+			submitting = true;
+		});
+		window.addEventListener('beforeunload', function (event) {
+			if (!submitting && refreshDirtyState() > 0) {
+				event.preventDefault();
+				event.returnValue = '';
+			}
+		});
+	}
+
 	// Copy the visible post IDs (for --ids of the generator script)
 	var copyButton = document.getElementById('bfami-copy-ids');
 	if (copyButton) {
