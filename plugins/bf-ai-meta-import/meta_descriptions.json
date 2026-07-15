@@ -1,0 +1,122 @@
+[
+ {
+  "id": 13217,
+  "url": "http://localhost:8080/2026/06/webmcp-the-end-of-clicks-and-the-semantic-upgrade-your-wordpress-site-actually-needs/",
+  "title": "WebMCP, the End of Clicks, and the Semantic Upgrade Your WordPress Site Actually Needs",
+  "title_chars": 86,
+  "description": "WebMCP offers a semantic upgrade for WordPress, reducing clicks and enhancing SEO with AI tools for better outcomes.",
+  "description_chars": 116,
+  "og_title": "WebMCP: WordPress Semantic Upgrade",
+  "og_title_chars": 34,
+  "model": "mistral-small",
+  "generated_at": "2026-07-14T08:55:04Z"
+ },
+ {
+  "id": 13194,
+  "url": "http://localhost:8080/2026/04/claude-code-claude-md-and-token-optimization-practical-tips-for-rag-development-without-burning-your-credits/",
+  "title": "Claude Code, CLAUDE.md, and Token Optimization: Practical Tips for RAG Development Without Burning Your Credits",
+  "title_chars": 111,
+  "description": "Master Claude Code, CLAUDE.md, and token optimization for RAG development. Save credits with practical tools and outcomes.",
+  "description_chars": 122,
+  "og_title": "RAG Development Tips: Save Credits",
+  "og_title_chars": 34,
+  "model": "mistral-small",
+  "generated_at": "2026-07-14T08:55:08Z"
+ },
+ {
+  "id": 13148,
+  "url": "http://localhost:8080/2026/02/ai-augmented-journalism-practical-implementation-of-semantic-clustering-multilingual-transcription-and-wordpress-automation/",
+  "title": "AI-Augmented Journalism: Practical Implementation of Semantic Clustering, Multilingual Transcription, and WordPress Automation",
+  "title_chars": 126,
+  "description": "AI-Augmented Journalism: Master tools for semantic clustering, multilingual transcription, and WordPress automation to boost productivity.",
+  "description_chars": 138,
+  "og_title": "AI-Augmented Journalism: Practical Tools",
+  "og_title_chars": 40,
+  "model": "mistral-small",
+  "generated_at": "2026-07-14T08:56:04Z"
+ },
+ {
+  "id": 13091,
+  "url": "http://localhost:8080/2025/11/ai-agentic-browsers-and-the-end-of-digital-autonomy/",
+  "title": "AI, Agentic Browsers and the End of Digital Autonomy",
+  "title_chars": 52,
+  "description": "AI's role in enhancing productivity raises concerns about digital autonomy. Understand tools and outcomes affecting personal data and cognitive validation.",
+  "description_chars": 155,
+  "og_title": null,
+  "og_title_chars": null,
+  "model": "mistral-small",
+  "generated_at": "2026-07-14T08:57:43Z"
+ },
+ {
+  "id": 13070,
+  "url": "http://localhost:8080/2025/10/rescuing-failed-ai-implementations-practical-explorations-with-n8n-ollama-geo/",
+  "title": "Rescuing Failed AI Implementations + Practical Explorations with n8n, Ollama & GEO",
+  "title_chars": 82,
+  "description": "Rescue failing AI projects with practical tools. Use n8n, Ollama & GEO for real outcomes. Master survival strategies for AI implementations.",
+  "description_chars": 140,
+  "og_title": "Rescue AI Projects with Tools",
+  "og_title_chars": 29,
+  "model": "mistral-small",
+  "generated_at": "2026-07-14T08:58:08Z"
+ },
+ {
+  "id": 13051,
+  "url": "http://localhost:8080/2025/06/ai-implementation-challenges-strategic-considerations-for-prompt-management-data-integration-and-organizational-knowledge-sharing/",
+  "title": "AI Implementation Challenges: Strategic Considerations for Prompt Management, Data Integration, and Organizational Knowledge Sharing",
+  "title_chars": 132,
+  "description": "AI implementation faces challenges in prompt management, data integration, and knowledge sharing. Identify tools and strategies for effective outcomes.",
+  "description_chars": 151,
+  "og_title": "AI Implementation Challenges",
+  "og_title_chars": 28,
+  "model": "mistral-small",
+  "generated_at": "2026-07-14T08:59:04Z"
+ },
+ {
+  "id": 13042,
+  "url": "http://localhost:8080/2025/05/maximizing-claude-ai-desktop-app-mcp-agents-presentation-generation-guide/",
+  "title": "Maximizing Claude AI: Desktop App, MCP, Agents & Presentation Generation Guide",
+  "title_chars": 78,
+  "description": "Maximize Claude AI with desktop app, MCP, agents, and presentation tools. Achieve efficient outcomes with specific tools.",
+  "description_chars": 121,
+  "og_title": "Maximizing Claude AI Tools",
+  "og_title_chars": 26,
+  "model": "mistral-small",
+  "generated_at": "2026-07-14T09:00:43Z"
+ },
+ {
+  "id": 13008,
+  "url": "http://localhost:8080/2025/02/the-green-ai-myth-carbon-costs-of-ml-models-insights-on-geo-and-deepseek-fine-tuning/",
+  "title": "The ‘Green’ AI Myth: Carbon Costs of ML Models & Insights on GEO and DeepSeek Fine-tuning",
+  "title_chars": 89,
+  "description": "AI's carbon footprint is a critical topic. This post evaluates tools like GEO and DeepSeek for fine-tuning, offering KPIs to measure AI's environmental impact.",
+  "description_chars": 159,
+  "og_title": "AI Carbon Costs: GEO & DeepSeek",
+  "og_title_chars": 31,
+  "model": "mistral-small",
+  "generated_at": "2026-07-14T09:01:08Z"
+ },
+ {
+  "id": 12947,
+  "url": "http://localhost:8080/2025/01/breadcrumbs-of-innovation-a-snapshot-of-ai-explorations/",
+  "title": "Breadcrumbs of Innovation: A Snapshot of AI Explorations",
+  "title_chars": 56,
+  "description": "AI explorations reveal societal impacts. Tools and outcomes from current projects and philosophical questions.",
+  "description_chars": 110,
+  "og_title": null,
+  "og_title_chars": null,
+  "model": "mistral-small",
+  "generated_at": "2026-07-14T09:02:43Z"
+ },
+ {
+  "id": 12927,
+  "url": "http://localhost:8080/2024/11/content-quality-how-sentence-embeddings-can-save-ai-generated-content-and-some-other-concerns-on-ai-environmental-impact-job-loss/",
+  "title": "Content Quality: How Sentence Embeddings Can Save AI-Generated Content and some other concerns on AI: Environmental Impact, Job Loss",
+  "title_chars": 132,
+  "description": "Sentence embeddings enhance AI-generated content quality. Address AI's environmental impact and job loss concerns with practical tools and outcomes.",
+  "description_chars": 148,
+  "og_title": "AI Content Quality: Sentence Embeddings",
+  "og_title_chars": 39,
+  "model": "mistral-small",
+  "generated_at": "2026-07-14T09:03:07Z"
+ }
+]

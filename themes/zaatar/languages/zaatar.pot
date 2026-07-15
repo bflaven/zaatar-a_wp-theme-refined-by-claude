@@ -1,0 +1,499 @@
+# Copyright (C) 2026 Bruno Flaven, TemplateLens, GretaThemes & Swift Ideas
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Zaatar 1.6\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/theme\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-14T06:42:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: zaatar\n"
+
+#. Theme Name of the theme
+#: style.css
+msgid "Zaatar"
+msgstr ""
+
+#. Theme URI of the theme
+#. Author URI of the theme
+#: style.css
+msgid "https://flaven.fr/"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "Zaatar is a clean and minimalist theme that allows your reader to focus on your content, with some AI features. Accent purple: #4F1993. Inspired by Allium (TemplateLens), Totomo (GretaThemes) & Supreme (Swift Ideas). Designed for news agencies, travel websites, business magazines, food recipes, health magazines, technology sites and all types of publishing or review sites. Fully compatible with the Gutenberg content editor. Easy to use, no coding!"
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "Bruno Flaven, TemplateLens, GretaThemes & Swift Ideas"
+msgstr ""
+
+#: 404.php:17
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#. Template Name of the theme
+msgid "ClientsShowcases"
+msgstr ""
+
+#: archive.php:30
+#: home.php:40
+#: index.php:24
+#: page-category-cloud.php:44
+#: page-tag-cloud.php:44
+#: taxonomy-bf_quotes_manager_author.php:24
+#: taxonomy-bf_quotes_manager_flavor.php:24
+#: taxonomy-bf_videos_manager_cat.php:24
+#: taxonomy-bf_videos_manager_tag.php:24
+#: taxonomy-product_for_sale_author.php:24
+#: taxonomy-product_for_sale_genre.php:25
+#: taxonomy-product_for_sale_kw.php:23
+msgid "Nothing Found"
+msgstr ""
+
+#. translators: %s: post title
+#: comments.php:37
+#, php-format
+msgctxt "comments title"
+msgid "One Reply to &ldquo;%s&rdquo;"
+msgstr ""
+
+#. translators: 1: number of comments, 2: comments title
+#: comments.php:49
+#, php-format
+msgctxt "comments title"
+msgid "%1$s Reply to &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s Replies to &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:66
+#: comments.php:86
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:68
+#: comments.php:88
+msgid "Older Comments"
+msgstr ""
+
+#: comments.php:69
+#: comments.php:89
+msgid "Newer Comments"
+msgstr ""
+
+#: comments.php:102
+msgid "Comments are closed."
+msgstr ""
+
+#: functions.php:71
+msgid "Header Menu"
+msgstr ""
+
+#: functions.php:72
+msgid "Top Menu"
+msgstr ""
+
+#: functions.php:143
+msgid "Main Sidebar"
+msgstr ""
+
+#: functions.php:145
+msgid "Add widgets here to appear in your sidebar."
+msgstr ""
+
+#: functions.php:188
+msgid "Toggle submenu"
+msgstr ""
+
+#: header.php:27
+msgid "Skip to content"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Home Zaatar"
+msgstr ""
+
+#: image.php:24
+msgid "Previous Image"
+msgstr ""
+
+#: image.php:25
+msgid "Next Image"
+msgstr ""
+
+#: inc/customizer/customizer-core.php:17
+msgctxt "Read More Label"
+msgid "Read More"
+msgstr ""
+
+#: inc/customizer/customizer-core.php:22
+msgid "&copy; Copyright"
+msgstr ""
+
+#: inc/customizer/customizer-core.php:22
+msgid "Y"
+msgstr ""
+
+#: inc/customizer/customizer.php:24
+msgid "Theme Options"
+msgstr ""
+
+#: inc/customizer/customizer.php:32
+msgid "General Options"
+msgstr ""
+
+#: inc/customizer/customizer.php:35
+msgid "Personalize the general settings of your theme."
+msgstr ""
+
+#: inc/customizer/customizer.php:46
+msgid "Read More Label"
+msgstr ""
+
+#: inc/customizer/customizer.php:59
+msgid "Excerpt Length"
+msgstr ""
+
+#: inc/customizer/customizer.php:60
+msgid "Zero (0) length will not show the excerpt."
+msgstr ""
+
+#: inc/customizer/customizer.php:73
+msgid "Display Featured Image at Single Posts"
+msgstr ""
+
+#: inc/customizer/customizer.php:83
+msgid "Layout Options"
+msgstr ""
+
+#: inc/customizer/customizer.php:86
+msgid "Personalize the layout settings of your theme."
+msgstr ""
+
+#: inc/customizer/customizer.php:96
+msgid "Theme Layout"
+msgstr ""
+
+#: inc/customizer/customizer.php:97
+msgid "Box layout will be visible at minimum 1200px display"
+msgstr ""
+
+#: inc/customizer/customizer.php:102
+msgid "Wide"
+msgstr ""
+
+#: inc/customizer/customizer.php:103
+msgid "Box"
+msgstr ""
+
+#: inc/customizer/customizer.php:114
+msgid "Main Sidebar Position (if active)"
+msgstr ""
+
+#: inc/customizer/customizer.php:119
+msgid "Right"
+msgstr ""
+
+#: inc/customizer/customizer.php:120
+msgid "Left"
+msgstr ""
+
+#: inc/customizer/customizer.php:128
+msgid "Footer Options"
+msgstr ""
+
+#: inc/customizer/customizer.php:131
+msgid "Personalize the footer settings of your theme."
+msgstr ""
+
+#: inc/customizer/customizer.php:142
+msgid "Copyright"
+msgstr ""
+
+#: inc/customizer/customizer.php:156
+msgid "Display Designer Credit"
+msgstr ""
+
+#: inc/customizer/customizer.php:166
+msgid "Support Options"
+msgstr ""
+
+#: inc/customizer/customizer.php:167
+msgid "Thanks for your interest in Zaatar! To share your feedback and for any support query you can reach us at"
+msgstr ""
+
+#: inc/customizer/customizer.php:182
+msgid "Zaatar Support"
+msgstr ""
+
+#: inc/customizer/customizer.php:198
+msgid "Add Your Review"
+msgstr ""
+
+#: inc/customizer/customizer.php:199
+msgid "Why not leave us a review on WordPress.org? Your review on WordPress will be highly appreciated, as it encourages us to keep updating and supporting the product."
+msgstr ""
+
+#: inc/customizer/customizer.php:214
+msgid "Review on WordPress.org"
+msgstr ""
+
+#. translators: %s: archive title.
+#: inc/seo.php:52
+#, php-format
+msgid "Archive of %s."
+msgstr ""
+
+#. Translators: If there are characters in your language that are not supported by Nunito Sans, translate this to 'off'. Do not translate into your own language.
+#: inc/template-functions.php:25
+msgctxt "Nunito Sans font: on or off"
+msgid "on"
+msgstr ""
+
+#. Translators: If there are characters in your language that are not supported by Roboto, translate this to 'off'. Do not translate into your own language.
+#: inc/template-functions.php:33
+msgctxt "Roboto font: on or off"
+msgid "on"
+msgstr ""
+
+#. Translators: To add an additional character subset specific to your language, translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
+#: inc/template-functions.php:41
+msgctxt "Add new subset (cyrillic, greek, devanagari, vietnamese)"
+msgid "no-subset"
+msgstr ""
+
+#. translators: %1$s is Theme / Designer Name ( Zaatar ), %2$s is WordPress
+#: inc/template-functions.php:265
+#, php-format
+msgid "%1$s &sdot; %2$s Powered by %3$s"
+msgstr ""
+
+#: inc/template-tags.php:20
+msgid "Previous Page"
+msgstr ""
+
+#: inc/template-tags.php:21
+msgid "Next Page"
+msgstr ""
+
+#: inc/template-tags.php:22
+msgid "Page"
+msgstr ""
+
+#: inc/template-tags.php:39
+msgid "Next"
+msgstr ""
+
+#: inc/template-tags.php:40
+msgid "Prev"
+msgstr ""
+
+#: inc/template-tags.php:79
+msgctxt "post date"
+msgid "Posted on"
+msgstr ""
+
+#: inc/template-tags.php:90
+msgctxt "post modified date"
+msgid "Updated on"
+msgstr ""
+
+#. translators: %d: estimated reading time in minutes.
+#: inc/template-tags.php:130
+#, php-format
+msgid "%d min read"
+msgstr ""
+
+#. translators: %s: post author
+#: inc/template-tags.php:167
+#, php-format
+msgctxt "post author"
+msgid "by %s"
+msgstr ""
+
+#: inc/template-tags.php:201
+msgctxt "sticky post label"
+msgid "Featured"
+msgstr ""
+
+#: inc/template-tags.php:233
+msgctxt "post edit link label"
+msgid "Edit"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:403
+msgctxt "Used between category, there is a space after the comma."
+msgid ", "
+msgstr ""
+
+#: inc/template-tags.php:408
+msgid "Posted in:"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:414
+msgctxt "Used between tag, there is a space after the comma."
+msgid ", "
+msgstr ""
+
+#: inc/template-tags.php:419
+msgid "Tags:"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers.
+#: inc/template-tags.php:430
+#, php-format
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#. Template Name of the theme
+msgid "QuotesAuthors"
+msgstr ""
+
+#. Template Name of the theme
+msgid "QuotesCloudSaveurs"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Category Cloud Page"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Clients Showcases"
+msgstr ""
+
+#. Template Name of the theme
+msgid "QuotesFlavors"
+msgstr ""
+
+#. Template Name of the theme
+msgid "SEO Blog Page"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Tag Cloud Page"
+msgstr ""
+
+#. Template Name of the theme
+msgid "VideosCategories"
+msgstr ""
+
+#. Template Name of the theme
+msgid "VideosTags"
+msgstr ""
+
+#: search.php:17
+msgid "Search Results for:"
+msgstr ""
+
+#: searchform.php:11
+#: searchform.php:12
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:12
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr ""
+
+#: searchform.php:14
+msgctxt "submit button"
+msgid "Search"
+msgstr ""
+
+#: template-parts/content/content-404.php:14
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr ""
+
+#: template-parts/content/content-404.php:21
+msgid "Search"
+msgstr ""
+
+#: template-parts/content/content-404.php:35
+msgid "Recent Posts"
+msgstr ""
+
+#: template-parts/content/content-404.php:49
+msgid "Categories"
+msgstr ""
+
+#: template-parts/content/content-404.php:64
+msgid "Archives"
+msgstr ""
+
+#: template-parts/content/content-404.php:79
+msgid "Tags"
+msgstr ""
+
+#: template-parts/content/content-bf_quotes_manager.php:66
+#: template-parts/content/content-bf_videos_manager.php:334
+#: template-parts/content/content-books-author.php:44
+#: template-parts/content/content-books-genre.php:47
+#: template-parts/content/content-books-kw.php:45
+#: template-parts/content/content-image-attachment.php:54
+#: template-parts/content/content-page-gg.php:36
+#: template-parts/content/content-page.php:29
+#: template-parts/content/content-quotes-authors.php:49
+#: template-parts/content/content-quotes-flavors.php:44
+#: template-parts/content/content-single.php:41
+#: template-parts/content/content-videos-categories.php:44
+#: template-parts/content/content-videos-tags.php:49
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/content/content-image-attachment.php:64
+msgid "Edit"
+msgstr ""
+
+#. translators: 1: link to WP admin new post page.
+#: template-parts/content/content-none.php:20
+#, php-format
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content/content-none.php:33
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: template-parts/content/content-none.php:38
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+#: template-parts/header/site-navigation.php:9
+msgid "Primary Menu"
+msgstr ""
+
+#: template-parts/header/site-navigation.php:14
+#: template-parts/header/site-navigation.php:38
+msgid "Menu"
+msgstr ""
+
+#: template-parts/header/site-navigation.php:30
+msgid "Toggle dark mode"
+msgstr ""
+
+#: template-parts/header/site-navigation.php:40
+msgid "Close menu"
+msgstr ""
+
+#. translators: %1$s: post author
+#: template-parts/post/author-bio.php:28
+#, php-format
+msgid "Published by %1$s"
+msgstr ""
+
+#. translators: %1$s: post author
+#: template-parts/post/author-bio.php:41
+#, php-format
+msgid "View all posts by %1$s"
+msgstr ""
