@@ -281,3 +281,9 @@ cd /Users/brunoflaven/Documents/01_work/_wp_flaven_refine_theme/
 docker compose down
 docker compose up -d
 ```
+
+3. For Claude Code, I use Fable
+```bash
+Claude Code v2.1.208
+Fable 5 · Claude Pro
+```
