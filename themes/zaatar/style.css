@@ -4,7 +4,7 @@ Theme URI: https://flaven.fr/
 Author: Bruno Flaven, TemplateLens, GretaThemes & Swift Ideas
 Author URI: https://flaven.fr/
 Description: Zaatar is a clean and minimalist theme that allows your reader to focus on your content, with some AI features. Accent purple: #4F1993. Inspired by Allium (TemplateLens), Totomo (GretaThemes) & Supreme (Swift Ideas). Designed for news agencies, travel websites, business magazines, food recipes, health magazines, technology sites and all types of publishing or review sites. Fully compatible with the Gutenberg content editor. Easy to use, no coding!
-Version: 1.7
+Version: 1.7.1
 Requires at least: 5.9
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -4559,6 +4559,17 @@ html[data-theme="dark"] .semantic-sidebar-widget a:focus,
 html[data-theme="dark"] .tag-badge:focus,
 html[data-theme="dark"] .related-post-card a:focus {
   outline-color: var(--color-link);
+}
+
+/* Semantic search box (main content, not the sidebar widget above) keeps a
+   hardcoded white background in both themes by design, but the generic
+   input[type=search] rule further up this file paints its text with
+   --color-text-dark, which flips to near-white in dark mode — invisible on
+   the box's own always-white background. Force the text back to the
+   light-mode dark color here; the placeholder rule already stays legible
+   since it was never tied to --color-text-dark. */
+html[data-theme="dark"] .rss-search-form__input {
+  color: #1d2327;
 }
 
 /* Reverse direction: OS prefers dark but the toggle says light — undo

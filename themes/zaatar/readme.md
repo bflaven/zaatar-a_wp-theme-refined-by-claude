@@ -80,6 +80,18 @@ window.matchMedia and CSS aspect-ratio.)
 
 ## == Changelog ==
 
+### = 1.7.1 =
+Released: September 16, 2026
+
+* Dark mode fix: the semantic search box's input text (.rss-search-form__input,
+  main content area, not the sidebar widget) was rendering near-white on its
+  own always-white background — invisible — because the generic
+  input[type=search] rule paints text with --color-text-dark, which flips to
+  near-white in dark mode while this input's background never flips. Added a
+  html[data-theme="dark"] override forcing the text back to the light-mode
+  dark color, matching the existing pattern already used for
+  .semantic-sidebar-widget elsewhere in this file.
+
 ### = 1.7 =
 Released: July 14, 2026
 
